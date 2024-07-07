@@ -1,0 +1,55 @@
+{
+  "restaurants": [
+    {
+      "name": "The Great Restaurant",
+      "location": "Bangalore",
+      "cuisine": "Indian",
+      "rating": "5",
+      "contactNumber": "9000340909",
+      "fullAddress": "BEML Layout, Mailasandra",
+      "email": "restaurant1@gmail.com",
+      "description": "It serves up south Indian, North Indian dishes that are easy on the stomach and good on the wallet.",
+      "timings": "11AM- 9PM",
+      "type": "Veg/Non-Veg",
+      "deliveryCharges": "Free",
+      "menu": [],
+      "reviews": [
+        {
+          "customer": "Customer 1",
+          "review": "Great food and ambience"
+        },
+        {
+          "customer": "Customer 2",
+          "review": "Friendly staff and delicious meals"
+        }
+      ],
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "name": "Food Haven",
+      "description": "Veg - Non veg",
+      "location": "456 Elm St",
+      "contactNumber": "9000340808",
+      "timings": "11AM- 9PM",
+      "cuisine": "Chinese",
+      "rating": "4"
+    },
+    {
+      "name": "Panchvati",
+      "location": "Bangalore",
+      "cuisine": "Indian",
+      "rating": "4",
+      "contactNumber": "9000340909",
+      "fullAddress": "BEML Layout, Mailasandra",
+      "email": "restaurant1@gmail.com",
+      "description": "sdfghjkl;kjhgfd",
+      "timings": "11AM- 9PM",
+      "type": "Veg",
+      "deliveryCharges": "Free",
+      "menu": [],
+      "reviews": [],
+      "id": "SDa6Vbf"
+    }
+  ]
+}

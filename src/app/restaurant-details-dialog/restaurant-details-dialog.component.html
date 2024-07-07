@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Restaurant Details</h1>
+<div mat-dialog-content>
+  <mat-card>
+    <div class="name">{{ data.name }}</div>
+    <div class="description">{{data.description}}</div>
+    <mat-card-content>
+      <p><strong>Rating: </strong>{{ data.rating }} Stars</p>
+      <p><strong>Cuisine: </strong>{{ data.cuisine }}</p>
+      <p><strong>Location: </strong>{{ data.location }}</p>
+      <p><strong>Full Address: </strong>{{ data.fullAddress }}</p>
+      <p><strong>Contact Number: </strong>{{ data.contactNumber }}</p>
+      <p><strong>Email: </strong>{{ data?.email }}</p>
+      <p><strong>Type: </strong>{{ data?.type }}</p>
+      <p><strong>Description: </strong>{{ data?.description }}</p>
+      <p><strong>Timings: </strong>{{ data?.timings }}</p>
+      <p><strong>DeliveryCharges: </strong>{{ data?.deliveryCharges }}</p>
+      <div *ngIf="data?.reviews?.length">
+        <p><strong>Reviews: </strong></p>
+        <ul>
+          <li *ngFor="let review of data.reviews">
+            {{ review.customer }}: "{{ review.review }}"
+          </li>
+        </ul>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>

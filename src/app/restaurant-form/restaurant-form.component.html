@@ -1,0 +1,204 @@
+<div class="header">
+  <h3 class="title">FoodieDelight</h3>
+</div>
+<mat-card class="formContainer">
+  <div class="heading">
+    <h1 mat-card-title>{{isEditMode ? 'Edit Restaurant Details' : 'Add New Restaurant'}}</h1>
+  </div>
+  <form [formGroup]="restaurantForm" (ngSubmit)="onSubmit()">
+    <div class="form-layout">
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" required formControlName="name" />
+          <mat-error *ngIf="restaurantForm.controls.name.errors?.required">Name is required!</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Location</mat-label>
+          <input matInput type="text" required formControlName="location" />
+          <mat-error *ngIf="restaurantForm.controls.location.errors?.required">Location is required!</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-layout">
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Full Address</mat-label>
+          <input matInput type="text" required formControlName="fullAddress" />
+          <mat-error *ngIf="restaurantForm.controls.fullAddress.errors?.required">Full Address is required!</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Contact No. </mat-label>
+          <input
+            matInput
+            type="text"
+            required
+            formControlName="contactNumber"
+            (keypress)="isNumberKey($event)" maxlength="10" minlength="10"
+          />
+          <mat-error *ngIf="restaurantForm.controls.contactNumber.errors?.required">Contact Number is required!</mat-error>
+          <mat-error *ngIf="restaurantForm.controls.contactNumber.errors?.['pattern']">
+            Please enter a valid mobile number.
+        </mat-error>
+        <mat-error *ngIf="restaurantForm.controls.contactNumber.errors?.minlength">Mobile Number
+            should be
+            of 10 characters
+        </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-layout">
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Email </mat-label>
+          <input matInput type="email" required formControlName="email" />
+          <mat-error *ngIf="restaurantForm.controls.email?.errors?.required">Email is required!</mat-error>
+          <mat-error *ngIf="restaurantForm.controls.email?.errors?.email">Invalid
+            email address
+        </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label> Timings </mat-label>
+          <input matInput type="text" required formControlName="timings" />
+          <mat-error *ngIf="restaurantForm.controls.timings.errors?.required">Timings is required!</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-layout">
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label> Delivery Charges </mat-label>
+          <input
+            matInput
+            type="text"
+            required
+            formControlName="deliveryCharges"
+          />
+          <mat-error *ngIf="restaurantForm.controls.deliveryCharges.errors?.required">Name is required!</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label> Type </mat-label>
+          <mat-select required formControlName="type">
+            <mat-option value="Veg">Pure Veg Restaurant</mat-option>
+            <mat-option value="Veg/Non-Veg"
+              >Veg & Non-Veg Restaurant</mat-option
+            >
+          </mat-select>
+          <mat-error *ngIf="restaurantForm.controls.type.errors?.required">Name is required!</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-layout">
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Cuisine</mat-label>
+          <mat-select required formControlName="cuisine">
+            <mat-option value="Indian">Indian</mat-option>
+            <mat-option value="Chinese">Chinese</mat-option>
+            <mat-option value="Italian">Indian</mat-option>
+            <mat-option value="French">Chinese</mat-option>
+          </mat-select>
+          <mat-error *ngIf="restaurantForm.controls.cuisine.errors?.required">Name is required!</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Ratings</mat-label>
+          <mat-select required formControlName="rating">
+            <mat-option value="1">1</mat-option>
+            <mat-option value="2">2</mat-option>
+            <mat-option value="3">3</mat-option>
+            <mat-option value="4">4</mat-option>
+            <mat-option value="5">5</mat-option>
+          </mat-select>
+          <mat-error *ngIf="restaurantForm.controls.rating.errors?.required">Name is required!</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        type="text"
+        required
+        formControlName="description"
+      ></textarea>
+      <mat-error *ngIf="restaurantForm.controls.description.errors?.required">Name is required!</mat-error>
+    </mat-form-field>
+
+    <div formArrayName="menu">
+      <button mat-flat-button color="primary" (click)="addMenuItem()">
+        Add Menu Item
+      </button>
+      <div *ngFor="let item of menuControls; let i = index" [formGroupName]="i">
+        <mat-form-field appearance="fill">
+          <mat-label>Menu Item and Price</mat-label>
+          <input matInput formControlName="menuItem" type="text" />
+          <mat-icon color="warn" matSuffix>delete</mat-icon>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div formArrayName="reviews">
+      <button
+        class="reviewButton"
+        mat-flat-button
+        color="primary"
+        (click)="addReview()"
+      >
+        Add Review
+      </button>
+      <div
+        *ngFor="let review of reviewControls; let i = index"
+        [formGroupName]="i"
+      >
+        <mat-form-field appearance="fill">
+          <mat-label>Customer Name</mat-label>
+          <input matInput formControlName="customer"  />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Review</mat-label>
+          <textarea matInput formControlName="review" ></textarea>
+        </mat-form-field>
+        <div style="float: right">
+          <button mat-icon-button color="warn" (click)="removeReview(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button
+        class="submitBtn"
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="restaurantForm.invalid"
+      >
+      {{isEditMode ? 'Edit Details' : 'Add New Restaurant'}}
+      </button>
+      <button
+        class="backBtn"
+        mat-raised-button
+        colour="primary"
+        type="button"
+        (click)="onCancel()"
+      >
+        Back to Home
+      </button>
+    </div>
+  </form>
+</mat-card>
